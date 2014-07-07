@@ -1,40 +1,51 @@
 require 'faker'
 
-# Create Users
-25.times do
+5.times do
   user = User.new(
-    name:     Faker::Name.name,
-    email:    Faker::Internet.email,
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
     password: Faker::Lorem.characters(10)
-  )
+    )
   user.skip_confirmation!
   user.save
 end
+
 users = User.all
 
-# Create Topics
-15.times do
-  Topic.create(
-    name:         Faker::Lorem.word
+10.times do
+  topic = Topic.create(
+    name:  Faker::Lorem.sentence
   )
+  5.times do
+    Bookmark.create(
+      user: users.sample, 
+      topic: topic,
+      url: Faker::Internet.url
+    )
+  end
 end
-topics = Topic.all
 
-# Create Bookmarks
-100.times do
-  Bookmark.create(
-    user:   users.sample,
-    topic:  topics.sample,
-    url:    Faker::Internet.url
-  )
-end
-bookmarks = Bookmark.all
+# Create Comments
 
-User.first.update_attributes(
-  email: 'mrtest@mailinator.com',
+# Create an admin user
+admin = User.new(
+  name:     'Admin User',
+  email:    'admin@example.com',
   password: 'helloworld',
 )
+admin.skip_confirmation!
+admin.save
 
-puts "Seed finished"
-puts "#{User.count} users created"
-puts "#{Bookmark.count} bookmarks created"
+# Create a member
+member = User.new(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld',
+)
+member.skip_confirmation!
+member.save
+
+puts "Seeds finished:"
+puts "#{Topic.count} Blocmarks Topics Created"
+puts "#{Bookmark.count} Blocmarks Bookmarks Created"
+
