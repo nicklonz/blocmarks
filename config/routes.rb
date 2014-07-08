@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
  
-  get 'welcome/index'
+  resources :bookmarks
 
-  get 'welcome/about'
+  get 'about' => 'welcome#about'
 
   root to: 'welcome#index'
 end
