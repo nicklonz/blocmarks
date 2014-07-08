@@ -25,8 +25,6 @@ users = User.all
   end
 end
 
-# Create Comments
-
 # Create an admin user
 admin = User.new(
   name:     'Admin User',
