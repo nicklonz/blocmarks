@@ -15,7 +15,10 @@
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to bookmark.url, bookmark.url %>
-            <br><%= link_to "Delete Bookmark", [@topic, bookmark], method: :delete, class: 'btn btn-primary', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+            <br>
+             <%= render partial: 'favorites/favorite', locals: { topic: @topic, bookmark: bookmark } %>
+             <br>
+              <%= link_to "Delete Bookmark", [@topic, bookmark], method: :delete, class: 'btn btn-primary', data: { confirm: 'Are you sure you want to delete this topic?' } %>
           </h4>
         </div>
       </div>

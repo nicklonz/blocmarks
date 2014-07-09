@@ -1,5 +1,5 @@
   <div class="favorite">
-    <% if favorite = current_user.favorited(bookmakr) %>
+    <% if favorite = current_user.favorited(bookmark) %>
       <%= link_to [topic, bookmark, favorite], class: 'btn btn-danger', method: :delete do %>
         <i class="glyphicon glyphicon-star-empty"> </i>&nbsp; Unfavorite
       <% end %>
@@ -9,4 +9,3 @@
       <% end %>
     <% end %>
   </div>
-<% end %>

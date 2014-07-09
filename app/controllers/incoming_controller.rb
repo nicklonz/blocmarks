@@ -26,6 +26,8 @@ class IncomingController < ApplicationController
     bookmark.topic = topic
     bookmark.save
 
+    # send an email to the admin
+
     head 200
   end
 end
