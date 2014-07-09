@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update]
   resources :topics do
     resources :bookmarks, except: [:index] do
-      resources :favorites
+      resources :favorites, only: [:create, :destroy]
     end
   end
   root to: 'welcome#index'
