@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  def favorited(post)
+  def favorited(bookmark)
     self.favorites.where(bookmark_id: bookmark.id).first
   end
 end

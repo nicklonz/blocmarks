@@ -24,13 +24,17 @@ class TopicsController < ApplicationController
     end
   end
 
-  def destroy
-    @topic = Topic.find(params[:topic_id])
-    @bookmark = @topic.bookmarks.find(params[:bookmark_id])
-    @favorite = Favorite.find(params[:id])
+def destroy
+    @topic = Topic.find(params[:id])
+    name = @topic.name
 
-    if @favorite.destroy
-      redirect_to user_path(current_user)
+    authorize @topic
+    if @topic.destroy
+      flash[:notice] = "\"#{url}\" was deleted successfully."
+      redirect_to topics_path
+    else
+      flash[:error] = "There was an error deleting the topic."
+      render :show
     end
   end
 
