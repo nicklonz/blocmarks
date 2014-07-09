@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  
+
   def index
     @topics = Topic.all
     @topics = @topics.sort {|x, y| y.bookmarks.count <=> x.bookmarks.count }
@@ -9,7 +9,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @bookmarks = @topic.bookmarks
-    authorize @topic
   end
 
   def new
@@ -28,9 +27,8 @@ def destroy
     @topic = Topic.find(params[:id])
     name = @topic.name
 
-    authorize @topic
     if @topic.destroy
-      flash[:notice] = "\"#{url}\" was deleted successfully."
+      flash[:notice] = "\"#{name}\" was deleted successfully."
       redirect_to topics_path
     else
       flash[:error] = "There was an error deleting the topic."
@@ -44,11 +42,16 @@ def destroy
 
   def create
     @topic = Topic.new(topic_params)
-    authorize @topic
     if @topic.save
       redirect_to @topic
     else
       render :new
     end
   end
+
+  private
+    def topic_params
+      params.require(:topic).permit(:name)
+    end
+
 end

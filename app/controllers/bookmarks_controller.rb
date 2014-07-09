@@ -4,20 +4,28 @@ class BookmarksController < ApplicationController
   #   @bookmarks = Bookmark.all
   # end
 
-  # def new
-  #   @bookmark = Bookmark.new
-  # end
+  def new
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = Bookmark.new
+  end
 
-  # def create
+   def create
+    @topic = Topic.find(params[:topic_id])
+    @bookmark = current_user.bookmarks.build(params.require(:bookmark).permit(:url))
+    @bookmark.topic = @topic
 
-  # end
+    if @bookmark.save
+      redirect_to @topic
+    else
+      render :new
+    end
+  end
 
-     def destroy
+  def destroy
     @topic = Topic.find(params[:topic_id])
     @bookmark = Bookmark.find(params[:id])
 
-    title = @bookmark.title
-    authorize @bookmark
+    url = @bookmark.url
     if @bookmark.destroy
       flash[:notice] = "\"#{url}\" was deleted successfully."
       redirect_to @topic
