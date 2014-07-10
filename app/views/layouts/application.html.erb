@@ -20,11 +20,11 @@
          <% if current_user %>
           Hello <%= link_to current_user.email, current_user %>!
           <%= link_to edit_user_registration_path, class: 'btn btn-primary btn-sm' do %>
-            <span class="glyphicon glyphicon-user"></span>
+            <span class="glyphicon glyphicon-user" title="User Profile"></span>
           <% end %>
 
           <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-sm' do %>
-            <span class="glyphicon glyphicon-log-out"></span>
+            <span class="glyphicon glyphicon-log-out" title="Sign Out"></span>
           <% end %>
         <% else %>
          <%= link_to "Sign In", new_user_session_path %> or
