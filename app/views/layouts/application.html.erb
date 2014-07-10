@@ -9,13 +9,11 @@
   <body>
     <div class="container" id="wrapper">
       <ul class="nav nav-tabs">
-        <% if current_user %>
-          <li><%= link_to "Blocmarks", topics_path %></li>
-        <% else %>
+
           <li><%= link_to "Home",root_path %></li>
           <li><%= link_to "Blocmarks", topics_path %></li>
-        <% end %>
-
+          <li><%= link_to "About", about_path %></li>
+        
         <div class="pull-right user-info">
          <% if current_user %>
           Hello <%= link_to current_user.email, current_user %>!
