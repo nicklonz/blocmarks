@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-8">
+      <div class="media-body">
+        <h1 class="media-heading"><%= @user.email %></h1>
+          <h2><%= pluralize(@user.bookmarks.count, 'bookmark') %></h2>
+        <% @user.bookmarks.each do |bookmark| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= link_to bookmark.url, bookmark.url %>
+              </h4>
+            </div>
+          </div>
+        <% end %>
+          <h2><%= pluralize(@user.favorites.count, 'favorite') %></h2>
+        <% @user.favorites.each do |favorite| %>
+          <div class="media">
+            <div class="media-body">
+              <h4 class="media-heading">
+                <%= link_to favorite.bookmark.url, favorite.bookmark.url %>
+              </h4>
+            </div>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>
